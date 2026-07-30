@@ -11,8 +11,7 @@ Repositorio para versionar configuracoes reutilizaveis do Codex: skills, plugins
 │   │   ├── aprofundador -> ../../plugins/codex-configs/skills/aprofundador
 │   │   ├── humanizer-br -> ../../plugins/codex-configs/skills/humanizer-br
 │   │   ├── pre-task-spec-approval -> ../../plugins/codex-configs/skills/pre-task-spec-approval
-│   │   ├── ralph-marketer -> ../../plugins/codex-configs/skills/ralph-marketer
-│   │   └── token-capital-capture -> ../../plugins/codex-configs/skills/token-capital-capture
+│   │   └── ralph-marketer -> ../../plugins/codex-configs/skills/ralph-marketer
 │   └── plugins/
 │       └── marketplace.json
 └── plugins/
@@ -23,8 +22,7 @@ Repositorio para versionar configuracoes reutilizaveis do Codex: skills, plugins
         │   ├── aprofundador/
         │   ├── humanizer-br/
         │   ├── pre-task-spec-approval/
-        │   ├── ralph-marketer/
-        │   └── token-capital-capture/
+        │   └── ralph-marketer/
         └── templates/
             ├── AGENTS.md
             ├── projects/
@@ -59,8 +57,6 @@ Regras praticas:
 
 `ralph-marketer` adapta o fluxo Ralph Wiggum Marketer para Codex, com pipeline de conteudo SaaS, PRD, SQLite, rascunhos, revisao e publicacao.
 
-`token-capital-capture` transforma sessoes Codex relevantes em eventos, memorias, patterns, evals ou decisoes versionadas no repositorio de Token Capital configurado pelo projeto. Use no inicio e no fechamento de tarefas nao triviais, bugs, decisoes, deploys, operacao, IA/agentes ou qualquer sessao com aprendizado reutilizavel.
-
 ## Uso em projetos
 
 ### Uso direto como repo de skills
@@ -93,7 +89,7 @@ Copie os templates para o projeto que vai receber as regras:
 AGENTS.md
 ```
 
-No `AGENTS.md`, substitua os placeholders como `{PROJECT_NAME}`, `{WORKTREE_ROOT}`, `{CRITICAL_PRIORITY_1}`, `{TOKEN_CAPITAL_REPO}` e `{TOKEN_CAPITAL_LOCAL_PATH}` pelas regras do projeto.
+No `AGENTS.md`, substitua os placeholders como `{PROJECT_NAME}`, `{WORKTREE_ROOT}` e `{CRITICAL_PRIORITY_1}` pelas regras do projeto.
 
 Se o projeto tiver frontend com dev server compartilhado, copie `plugins/codex-configs/templates/tools/ensure-frontend-dev.sh` para:
 

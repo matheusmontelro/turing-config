@@ -28,16 +28,6 @@ They apply to the whole project unless a more specific `AGENTS.override.md` or n
 - Never expose secrets in logs, screenshots, API responses, comments, commits, or final answers.
 - If credentials are found in source code, immediately flag the security issue and propose remediation and rotation.
 
-## Token Capital Capture
-
-- Token Capital repository: `{TOKEN_CAPITAL_REPO}`.
-- Local Token Capital path: `{TOKEN_CAPITAL_LOCAL_PATH}`.
-- For non-trivial work, bugs, technical decisions, deploys, operations, AI/agent changes, contract/domain/frontend/backend changes, or any session with reusable learning, use the `token-capital-capture` skill at the start and before the final response.
-- After the task spec is approved and at the start of relevant work, search the Token Capital repository for useful memories, patterns, evals, decisions, or policies before implementing.
-- At the end of relevant work, create or update a `development_event` in the Token Capital repository, linking files changed, validations, consumed memories/evals/patterns/decisions, and the practical effect on future sessions.
-- If the session is trivial or read-only and creates no reusable learning, state in the final response: `Token Capital: not created` with a short reason.
-- Never store secrets, sensitive logs, raw personal data, or unnecessary private content in Token Capital. Store summary, references, and impact instead.
-
 ## Mandatory Spec Approval
 
 - Before every task, use the `pre-task-spec-approval` skill and present a pt-BR spec for explicit user approval.
