@@ -18,6 +18,7 @@ They apply to the whole project unless a more specific `AGENTS.override.md` or n
 
 ## Critical Working Rules
 
+- The mandatory spec gate below applies before every task and takes precedence over all execution workflows.
 - Never run production build, deploy, migration, destructive data, or broad restart commands without explicit user approval in the current conversation.
 - Use development-mode validation by default. Production builds are the exception and always require explicit approval in the current conversation.
 - At the end of any completed adjustment, identify which runtime services load the changed files, restart or reload only those corresponding services when a reload is required, then validate status, health, or logs.
@@ -32,26 +33,29 @@ They apply to the whole project unless a more specific `AGENTS.override.md` or n
 - Token Capital repository: `{TOKEN_CAPITAL_REPO}`.
 - Local Token Capital path: `{TOKEN_CAPITAL_LOCAL_PATH}`.
 - For non-trivial work, bugs, technical decisions, deploys, operations, AI/agent changes, contract/domain/frontend/backend changes, or any session with reusable learning, use the `token-capital-capture` skill at the start and before the final response.
-- At the start of relevant work, search the Token Capital repository for useful memories, patterns, evals, decisions, or policies before implementing.
+- After the task spec is approved and at the start of relevant work, search the Token Capital repository for useful memories, patterns, evals, decisions, or policies before implementing.
 - At the end of relevant work, create or update a `development_event` in the Token Capital repository, linking files changed, validations, consumed memories/evals/patterns/decisions, and the practical effect on future sessions.
 - If the session is trivial or read-only and creates no reusable learning, state in the final response: `Token Capital: not created` with a short reason.
 - Never store secrets, sensitive logs, raw personal data, or unnecessary private content in Token Capital. Store summary, references, and impact instead.
 
-## Pre-Implementation Spec And Parallel Worktrees
+## Mandatory Spec Approval
 
-- For any non-trivial code or configuration change, use the `pre-task-spec-approval` skill before editing files.
+- Before every task, use the `pre-task-spec-approval` skill and present a pt-BR spec for explicit user approval.
 - If the project keeps repo-scoped skills, the documented location is `.agents/skills/pre-task-spec-approval/SKILL.md`.
-- Codex must explore the codebase in read-only mode and produce a short pt-BR spec for approval, including:
+- This gate is universal. It includes analysis, explanations, textual answers, file reads, status checks, searches, diagnostics, simple commands, small edits, configuration, implementation, tests, builds, external actions, and delegated work.
+- The first substantive response to a new task must be the spec. Before approval, do not call tools, inspect files or systems, browse, run commands, delegate work, answer the requested analysis, or change any local or external state.
+- Before approval, Codex may only use context already present, ask an essential blocking question, present or revise the spec, and receive approval, rejection, cancellation, or requested changes.
+- The original request is not advance approval. Approval is valid only when the user responds after the latest spec with an unambiguous confirmation such as `approved`, `pode executar`, or `segue com essa spec`.
+- The spec must include:
   - objective and expected behavior;
-  - allowed scope and explicitly out-of-scope areas;
-  - likely files or modules;
-  - contracts or compatibility concerns;
+  - planned inspections, tools, commands, or changes;
+  - allowed scope and explicitly out-of-scope areas, using `to be confirmed after approval` where inspection is required;
   - validation plan;
-  - risks, stop conditions, and done criteria;
-  - suggested branch and worktree when the task should run isolated.
-- Do not edit, create, move, delete, format, or commit a non-trivial task until the user explicitly approves the spec.
+  - risks and done criteria.
+- After approval, inspect and execute only the approved scope. If discovery requires a material scope change, stop and submit a revised spec for a new approval.
+- Approval, rejection, cancellation, revision of the current spec, execution within an approved spec, and its final report do not require another spec.
 - Default rule for parallelizable work: `1 approved demand = 1 spec = 1 worktree = 1 branch`.
-- Use isolated task worktrees for non-trivial or parallel work:
+- Use isolated task worktrees after approval for non-trivial or parallel work:
 
   ```text
   {WORKTREE_ROOT}/codex-{YYYYMMDD-HHMM}-{descricao-kebab}

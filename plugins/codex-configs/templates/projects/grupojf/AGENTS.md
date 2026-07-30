@@ -34,10 +34,16 @@ ou outro `AGENTS.md` mais especifico.
 
 ## Fluxo Codex
 
-- Para qualquer mudanca nao trivial de codigo ou configuracao, use a skill repo-scoped `.agents/skills/pre-task-spec-approval/SKILL.md` antes de editar.
-- Se a skill nao estiver instalada na sessao, siga o mesmo formato: objetivo, comportamento esperado, escopo permitido, fora de escopo, contratos, validacao, riscos e criterio de pronto.
-- Antes de editar, leia os arquivos relevantes e verifique `git status --short --branch`.
-- Se o trabalho for paralelo, grande ou tocar mais de um modulo, use worktree e branch isolados:
+- Antes de toda tarefa, use a skill repo-scoped `.agents/skills/pre-task-spec-approval/SKILL.md` e apresente uma spec em pt-BR para aprovacao explicita.
+- O gate e universal: vale para analise, explicacao, resposta textual, leitura de arquivo, status, busca, diagnostico, comando simples, edicao pequena, configuracao, implementacao, testes, builds, acoes externas e trabalho delegado.
+- A primeira resposta substantiva deve ser a spec. Antes da aprovacao, nao chame ferramentas, inspecione arquivos ou sistemas, navegue, rode comandos, delegue trabalho, responda a analise solicitada nem altere estado local ou externo.
+- Antes da aprovacao, use apenas o contexto ja presente para apresentar ou revisar a spec e, quando indispensavel, fazer uma pergunta bloqueante.
+- O pedido original nao e aprovacao antecipada. A autorizacao so vale quando o usuario responder depois da spec mais recente com confirmacao inequivoca, como `aprovado`, `pode executar` ou `segue com essa spec`.
+- Se a skill nao estiver instalada na sessao, siga o mesmo formato: objetivo, acoes previstas, escopo permitido, fora de escopo, validacao, riscos e criterio de pronto.
+- Depois da aprovacao, leia os arquivos relevantes, verifique `git status --short --branch` e execute apenas o escopo aprovado.
+- Se a descoberta exigir mudanca material de escopo, pare, apresente uma spec revisada e aguarde nova aprovacao.
+- Aprovacao, rejeicao, cancelamento ou revisao da spec atual, execucao dentro da spec aprovada e resposta final nao exigem uma nova spec.
+- Se o trabalho aprovado for paralelo, grande ou tocar mais de um modulo, use worktree e branch isolados:
 
 ```text
 /opt/worktrees/grupojf/codex-{YYYYMMDD-HHMM}-{descricao-kebab}

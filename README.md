@@ -51,7 +51,7 @@ Regras praticas:
 
 ## Skills
 
-`pre-task-spec-approval` transforma demandas nao triviais em uma spec curta em pt-BR antes de qualquer edicao. Use para alinhar objetivo, escopo, validacao, riscos, worktree e criterio de pronto.
+`pre-task-spec-approval` exige uma spec curta em pt-BR antes de toda tarefa, inclusive analise, leitura, busca, comando simples ou edicao pequena. Nenhuma ferramenta ou execucao e permitida antes da aprovacao explicita da spec.
 
 `humanizer-br` faz revisao editorial em portugues do Brasil para remover marcas de texto gerado por IA, melhorar ritmo, clareza, naturalidade e voz autoral.
 

@@ -1,60 +1,82 @@
 ---
 name: pre-task-spec-approval
-description: Monte uma spec curta e aprovavel antes de tarefas de codigo nao triviais. Use quando Codex receber uma demanda vaga, task de Jira, feature, bug fix, refactor, mudanca backend/frontend/config, trabalho em paralelo com outros agentes, ou qualquer ajuste que precise de escopo, arquivos permitidos/proibidos, validacao e criterio de pronto antes de editar arquivos.
+description: Criar uma spec curta e aprovavel antes de qualquer tarefa solicitada ao Codex. Usar sempre, inclusive para analise, resposta textual, leitura de arquivo, busca, diagnostico, comando simples, edicao pequena, configuracao ou implementacao, bloqueando ferramentas e execucao ate a aprovacao explicita da spec.
 ---
 
-# Spec Antes de Codar
+# Spec Antes de Qualquer Tarefa
 
 ## Objetivo
 
-Transformar uma demanda em linguagem natural em uma spec revisavel pelo usuario antes de qualquer implementacao nao trivial. A spec deve reduzir ambiguidade, definir limites de edicao e preparar a tarefa para execucao em worktree/branch isolado quando houver risco de concorrencia.
+Transformar toda tarefa em uma spec revisavel pelo usuario antes de qualquer
+analise, inspecao ou execucao. A spec deve tornar objetivo, escopo, acoes,
+ferramentas, validacao, riscos e criterio de pronto claros antes do trabalho.
 
 ## Regra Central
 
-Antes da aprovacao explicita do usuario, trabalhe somente em modo leitura.
+A primeira resposta substantiva a toda nova tarefa deve ser uma spec. Antes da
+aprovacao explicita da spec, nao execute a tarefa nem chame ferramentas, mesmo
+que a operacao seja simples, reversivel ou somente leitura.
 
 Permitido antes da aprovacao:
 
-1. Inspecionar arquivos, rotas, testes, historico Git e configuracoes.
-2. Rodar comandos de diagnostico somente leitura, como `rg`, `sed`, `git status`, `git diff`, `git log`, `git show`, `ls` e verificacoes que nao alterem estado.
-3. Fazer perguntas curtas quando a demanda tiver uma decisao de produto que nao pode ser inferida da codebase.
+1. Interpretar apenas a mensagem do usuario e o contexto ja presente.
+2. Fazer uma pergunta curta somente quando for impossivel montar uma spec segura
+   sem a resposta.
+3. Apresentar ou revisar a spec.
+4. Receber aprovacao, rejeicao, cancelamento ou pedido de ajuste da spec.
 
 Proibido antes da aprovacao:
 
-1. Editar, criar, mover, remover ou formatar arquivos.
-2. Criar migrations, branches, commits ou alterar servicos.
-3. Instalar dependencias, rodar builds de producao, reiniciar processos ou executar comandos destrutivos.
-4. Criar abstracoes compartilhadas, renomear modulos ou alterar contratos publicos sem estar na spec aprovada.
+1. Chamar qualquer ferramenta, subagente, conector, navegador, terminal ou API.
+2. Inspecionar arquivos, repositorios, logs, historico, status, mensagens,
+   calendarios, documentos ou sistemas externos.
+3. Rodar comandos, buscas, diagnosticos, testes, builds ou validacoes, inclusive
+   os que nao alteram estado.
+4. Responder a analise solicitada, produzir a entrega ou iniciar qualquer parte
+   operacional da tarefa.
+5. Editar, criar, mover, remover, formatar, instalar, enviar, publicar,
+   versionar, reiniciar ou alterar estado local ou externo.
 
-## Quando Exigir Spec
+## Cobertura Universal
 
-Exija spec para qualquer tarefa de codigo ou configuracao que nao seja claramente trivial.
+Exija spec para toda tarefa, sem excecao por tamanho ou aparente simplicidade.
+Isso inclui:
 
-Exemplos que exigem spec:
+1. Analise, explicacao, revisao, pesquisa ou resposta textual.
+2. Leitura de arquivo, consulta de status, busca local ou navegacao web.
+3. Comando simples, diagnostico ou verificacao somente leitura.
+4. Edicao pequena, correcao, configuracao, refactor ou feature.
+5. Instalacao, teste, build, automacao ou operacao em sistema externo.
+6. Trabalho delegado a outro agente.
 
-1. Feature nova.
-2. Bug fix com causa ainda desconhecida.
-3. Refactor ou renomeacao.
-4. Mudanca em backend, banco, webhooks, mensageria, Nginx, autenticacao, pagamentos ou integracoes.
-5. Mudanca frontend que altera fluxo, layout relevante, API, estado, permissao ou comportamento responsivo.
-6. Qualquer trabalho que possa rodar em paralelo com outro agente.
+Nao crie uma nova spec para:
 
-Pode pular a spec quando a tarefa for apenas analise, resposta textual, leitura de arquivo, comando simples, ou edicao pequena e explicitamente localizada pelo usuario. Se houver duvida, gere a spec.
+1. Aprovar, rejeitar, cancelar ou pedir ajuste da spec atual.
+2. Executar etapas e responder dentro do escopo de uma spec ja aprovada.
+3. Entregar o resumo final da tarefa aprovada.
+
+A solicitacao original nao vale como aprovacao antecipada. Considere aprovada
+somente uma resposta enviada depois da spec mais recente, como "aprovado",
+"pode executar", "segue com essa spec" ou equivalente inequivoco.
 
 ## Workflow
 
-1. Registrar que a tarefa esta em modo spec e que nenhuma edicao sera feita ainda.
-2. Explorar a codebase em leitura para encontrar arquivos provaveis, padroes locais, testes existentes e areas de risco.
-3. Identificar alteracoes locais ja existentes que possam afetar a tarefa; nao assumir que pertencem a sessao.
-4. Escrever a spec em portugues do Brasil, com linguagem que um usuario nao tecnico consiga aprovar.
-5. Aguardar aprovacao explicita antes de editar. Aceite respostas como "aprovado", "pode fazer", "manda", "segue" ou equivalente claro.
-6. Se o usuario pedir ajustes, revise a spec e aguarde nova aprovacao.
-7. Depois da aprovacao, criar ou usar um worktree/branch isolado quando a tarefa for nao trivial, paralela ou tocar mais de um modulo.
-8. Encaminhar a implementacao para o fluxo normal do repositorio e concluir com as validacoes e o criterio de pronto aprovados.
+1. Identificar a nova tarefa e entrar em modo spec sem chamar ferramentas.
+2. Escrever a spec em portugues do Brasil usando apenas o pedido e o contexto ja
+   disponivel. Marcar como "a confirmar depois da aprovacao" o que depender de
+   inspecao.
+3. Encerrar a resposta pedindo aprovacao explicita e aguardar.
+4. Se o usuario pedir ajustes, revisar a spec e aguardar nova aprovacao.
+5. Depois da aprovacao, inspecionar o contexto necessario e executar somente o
+   escopo aprovado.
+6. Se a descoberta exigir ampliar ou mudar materialmente o escopo, parar,
+   apresentar uma spec revisada e aguardar nova aprovacao.
+7. Concluir com as validacoes e o criterio de pronto aprovados.
 
 ## Template Obrigatorio
 
-Use este formato, adaptando o nivel de detalhe ao risco da tarefa:
+Use este formato em toda tarefa. Para pedidos simples, mantenha cada secao em
+uma linha; nunca elimine o gate:
 
 ```markdown
 ## Spec Proposta
@@ -62,45 +84,33 @@ Use este formato, adaptando o nivel de detalhe ao risco da tarefa:
 ### Objetivo
 {O resultado que o usuario quer, em uma ou duas frases.}
 
-### Comportamento Esperado
-- {Caso principal esperado.}
-- {Erros, limites ou estados vazios relevantes.}
-- {Comportamentos existentes que devem ser preservados.}
+### Acoes Previstas
+- {Inspecoes, comandos, ferramentas ou alteracoes que serao executados depois da aprovacao.}
 
 ### Escopo Permitido
-- `{arquivo-ou-modulo-provavel}`
-- `{arquivo-ou-modulo-provavel}`
+- {Arquivos, sistemas, dados ou assuntos cobertos; use "a confirmar depois da aprovacao" quando necessario.}
 
 ### Fora de Escopo
-- {Areas que nao serao tocadas.}
-- {Contratos, servicos ou fluxos criticos que serao preservados.}
-
-### Contratos e Compatibilidade
-- {Endpoints, funcoes, componentes, schemas, eventos ou integracoes afetadas.}
-- {Compatibilidade que precisa ser mantida.}
-
-### Worktree e Branch
-- Base prevista: `{branch-base}`
-- Branch sugerida: `work/codex-{data-hora}-{descricao-kebab}`
-- Worktree sugerido: `{WORKTREE_ROOT}/codex-{data-hora}-{descricao-kebab}`
-- Regra: 1 demanda aprovada = 1 spec = 1 worktree = 1 branch.
+- {O que nao sera consultado, alterado ou executado.}
 
 ### Validacao Esperada
-- `{comando ou verificacao focada}`
-- `{teste, health check ou verificacao manual coerente}`
+- {Como o resultado sera conferido.}
 
 ### Riscos e Pontos de Atencao
-- {Risco real ou "baixo risco" com justificativa curta.}
-- {Condicao que faria o agente parar e reportar antes de continuar.}
+- {Risco real ou "baixo risco", com justificativa curta.}
 
 ### Criterio de Pronto
 - {Como saber que a tarefa terminou.}
-- {O que o resumo final deve confirmar.}
+
+### Aprovacao
+Responda "aprovado" para autorizar exatamente esta spec.
 ```
 
 ## Regras Para Worktrees Paralelos
 
-Depois da aprovacao, use worktree isolado por padrao para tarefas nao triviais:
+A exigencia de spec e universal; o isolamento e condicional. Depois da
+aprovacao, use worktree isolado para tarefas nao triviais, paralelas ou que
+toquem mais de um modulo:
 
 ```text
 {WORKTREE_ROOT}/codex-{YYYYMMDD-HHMM}-{descricao-kebab}
@@ -118,4 +128,6 @@ Nunca coloque dois agentes implementando demandas diferentes no mesmo worktree. 
 
 ## Tom da Spec
 
-Escreva para decisao, nao para impressionar tecnicamente. O usuario deve conseguir responder "sim, e isso" ou "nao, nao mexe nessa parte" sem precisar entender detalhes internos da stack.
+Escreva para decisao, nao para impressionar tecnicamente. A spec deve ser
+proporcional ao risco, mas sempre clara o bastante para o usuario saber
+exatamente o que sera autorizado.
