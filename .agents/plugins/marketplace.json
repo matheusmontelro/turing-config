@@ -1,0 +1,20 @@
+{
+  "name": "codex-configs",
+  "interface": {
+    "displayName": "Codex Configs"
+  },
+  "plugins": [
+    {
+      "name": "codex-configs",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-configs"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

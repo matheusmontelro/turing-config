@@ -1,0 +1,8 @@
+interface:
+  display_name: "Aprofundador"
+  short_description: "Aprofunda textos com analise e contexto"
+  brand_color: "#7C3AED"
+  default_prompt: "Use $aprofundador para deixar este texto mais analitico."
+
+policy:
+  allow_implicit_invocation: true

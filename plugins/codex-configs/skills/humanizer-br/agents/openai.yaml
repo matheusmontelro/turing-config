@@ -1,0 +1,8 @@
+interface:
+  display_name: "Humanizer-BR"
+  short_description: "Humaniza textos em portugues brasileiro"
+  brand_color: "#2563EB"
+  default_prompt: "Use $humanizer-br para revisar este texto em portugues brasileiro."
+
+policy:
+  allow_implicit_invocation: true
