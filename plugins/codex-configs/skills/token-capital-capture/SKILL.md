@@ -1,6 +1,6 @@
 ---
 name: token-capital-capture
-description: Capturar Token Capital em sessoes Codex. Use no inicio e no fechamento de tarefas nao triviais, PRs, bugs, decisoes tecnicas, deploys, operacao, IA/agentes, mudancas de contrato, dominio, frontend, backend ou qualquer sessao com aprendizado reutilizavel; tambem use quando o usuario perguntar como uma sessao melhora as proximas.
+description: Capturar Token Capital em sessoes Codex. Use no inicio e no fechamento de tarefas nao triviais, bugs, decisoes tecnicas, deploys, operacao, IA/agentes, mudancas de contrato, dominio, frontend, backend ou qualquer sessao com aprendizado reutilizavel; tambem use quando o usuario perguntar como uma sessao melhora as proximas.
 ---
 
 # Token Capital Capture
@@ -36,7 +36,7 @@ event_script: scripts/create-development-event.py
 Toda sessao Codex deve fazer uma decisao explicita de captura antes do resumo
 final:
 
-1. Criar um `development_event` quando a sessao gerar PR, commit, mudanca de
+1. Criar um `development_event` quando a sessao gerar commit, mudanca de
    codigo/config/docs, deploy, investigacao tecnica, decisao, padrao recorrente,
    erro, feedback, mudanca em agentes/IA ou aprendizado reutilizavel.
 2. Se a sessao for trivial ou apenas leitura sem aprendizado reutilizavel,
@@ -76,7 +76,6 @@ python3 scripts/create-development-event.py \
   --intent "<por que a sessao existiu>" \
   --source-repo "<owner/repo-da-entrega>" \
   --source-path "<path-local-da-entrega>" \
-  --pr "#<numero-do-pr-quando-houver>" \
   --branch "<branch-da-entrega>" \
   --file-changed "<path>=<create|update|delete>" \
   --validation "<comando>=<resultado>" \
@@ -91,8 +90,8 @@ Adicionar links quando existirem:
 - `--eval-link <id>`
 - `--decision-link <id>`
 
-Publicar o evento por branch, PR, validacao e merge no repo de Token Capital.
-Quando a sessao principal tambem gerar PR, linkar esse PR no evento.
+Versionar o evento no repositorio de Token Capital conforme o fluxo definido
+pelo projeto.
 
 ## Promocao de Conhecimento
 
@@ -111,5 +110,5 @@ claro e impacto pratico em futuras sessoes.
 
 No resumo final da sessao, informar uma das duas opcoes:
 
-- `Token Capital:` evento criado/atualizado com caminho, PR e link.
+- `Token Capital:` evento criado/atualizado com caminho e link.
 - `Token Capital:` nao criado, com motivo curto.

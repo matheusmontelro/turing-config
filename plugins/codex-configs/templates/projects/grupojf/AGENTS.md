@@ -27,9 +27,9 @@ ou outro `AGENTS.md` mais especifico.
 - Nunca rode deploy, migracao, seed destrutivo, limpeza de banco, script de exclusao, restart amplo de producao ou build de producao sem aprovacao explicita do usuario na conversa atual.
 - Nunca use `git reset --hard`, `git checkout --`, `rm -rf`, `kill`, `pkill` ou comandos destrutivos sem motivo claro e aprovacao explicita, salvo quando o usuario pedir exatamente isso.
 - Nunca hardcode API keys, tokens, senhas, URLs completas de banco, certificados privados ou credenciais de producao.
-- Nunca exponha segredos em logs, screenshots, commits, PRs, comentarios ou respostas finais.
+- Nunca exponha segredos em logs, screenshots, commits, comentarios ou respostas finais.
 - Se encontrar credencial em codigo fonte, pare para sinalizar o risco, remova ou proponha remocao por variaveis de ambiente, e recomende rotacao.
-- Este repositorio ja teve segredos em historico. Antes de push/PR, rode uma checagem de segredos no diff e, quando possivel, Gitleaks.
+- Este repositorio ja teve segredos em historico. Antes de versionar alteracoes, rode uma checagem de segredos no diff e, quando possivel, Gitleaks.
 - Trate `backend/app/database/db.py`, `.env*`, webhooks, auth, pagamentos, WAPI, Delta e Bempaggo como areas sensiveis.
 
 ## Fluxo Codex
@@ -44,17 +44,12 @@ ou outro `AGENTS.md` mais especifico.
 work/codex-{YYYYMMDD-HHMM}-{descricao-kebab}
 ```
 
-- Para publicar trabalho no GitHub, use a skill repo-scoped `.agents/skills/post-adjustment-pr-automerge/SKILL.md` com `.codex/pr-automerge-policy.md`, quando disponivel.
-- Se a tarefa for simples e o usuario pedir push direto, mantenha commits pequenos e nao misture arquivos nao relacionados.
-
 ## Arquivos E Rotas Para Priorizar
 
 - Backend app: `backend/app/main.py`, `backend/app/routers/`, `backend/app/middleware/`, `backend/app/database/`.
 - Integracoes: `backend/app/delta_recorrente_sdk/`, `backend/app/anamnese_digital/`, routers de webhook e faturas.
 - Frontend API clients: `frontend/src/api/axiosInstance.ts`, `frontend/src/api/`, `frontend/src/routes/ProtectedRoute.tsx`.
 - Frontend telas: `frontend/src/pages/`, `frontend/src/components/`, `frontend/src/hooks/`, `frontend/src/styles/`.
-- Configuracao CI: `.github/workflows/ci.yml`, `.github/workflows/secret-scan.yml`, `.github/workflows/codeql.yml`.
-
 ## Frontend
 
 - O frontend usa Create React App, nao Vite.
@@ -84,18 +79,14 @@ Escolha validacoes conforme os arquivos alterados:
 - Backend: `backend/venv/bin/python -m compileall backend/app` quando o venv existir; senao `cd backend && python -m compileall app`.
 - Frontend unitario/React: `cd frontend && npm test -- --watchAll=false` quando a mudanca tiver testes viaveis.
 - Frontend runtime: `./tools/ensure-frontend-dev.sh` quando a tarefa exigir validar tela/fluxo em dev server.
-- CI equivalente: use os workflows do GitHub como fonte do que precisa passar antes de merge.
-
 Reporte somente comandos realmente executados. Se nao rodar algo por risco, tempo, ambiente ou aprovacao pendente, diga isso claramente.
 
-## Git E Publicacao
+## Git E Versionamento
 
 - A worktree pode estar suja com alteracoes do usuario. Nunca reverta trabalho que voce nao fez.
 - Nao use `git add .`; stage apenas arquivos da sessao.
 - Nao commite `.env`, logs, bancos locais, exports, CSV/XLSX/PDF, dumps, backups ou arquivos gerados.
-- Mensagens de commit e PR devem ser em portugues do Brasil, curtas e objetivas.
-- Preserve `main` como branch base do repositorio `matheusmontelro/grupojf`.
-- Dependabot pode abrir muitos PRs por vulnerabilidades. Feche, agrupe ou ajuste somente quando o usuario pedir.
+- Mensagens de commit devem ser em portugues do Brasil, curtas e objetivas.
 
 ## Resposta Final
 

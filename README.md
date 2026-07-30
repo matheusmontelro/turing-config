@@ -10,7 +10,6 @@ Repositorio para versionar configuracoes reutilizaveis do Codex: skills, plugins
 │   ├── skills/
 │   │   ├── aprofundador -> ../../plugins/codex-configs/skills/aprofundador
 │   │   ├── humanizer-br -> ../../plugins/codex-configs/skills/humanizer-br
-│   │   ├── post-adjustment-pr-automerge -> ../../plugins/codex-configs/skills/post-adjustment-pr-automerge
 │   │   ├── pre-task-spec-approval -> ../../plugins/codex-configs/skills/pre-task-spec-approval
 │   │   ├── ralph-marketer -> ../../plugins/codex-configs/skills/ralph-marketer
 │   │   └── token-capital-capture -> ../../plugins/codex-configs/skills/token-capital-capture
@@ -23,13 +22,11 @@ Repositorio para versionar configuracoes reutilizaveis do Codex: skills, plugins
         ├── skills/
         │   ├── aprofundador/
         │   ├── humanizer-br/
-        │   ├── post-adjustment-pr-automerge/
         │   ├── pre-task-spec-approval/
         │   ├── ralph-marketer/
         │   └── token-capital-capture/
         └── templates/
             ├── AGENTS.md
-            ├── pr-automerge-policy.md
             ├── projects/
             │   └── grupojf/
             └── tools/
@@ -56,22 +53,13 @@ Regras praticas:
 
 `pre-task-spec-approval` transforma demandas nao triviais em uma spec curta em pt-BR antes de qualquer edicao. Use para alinhar objetivo, escopo, validacao, riscos, worktree e criterio de pronto.
 
-`post-adjustment-pr-automerge` define um fluxo de fim de tarefa para:
-
-- implementar em worktree de tarefa aprovado ou no checkout local, conforme o contexto;
-- publicar a partir do proprio worktree aprovado ou de worktree limpo quando a implementacao veio de checkout compartilhado;
-- copiar apenas arquivos da sessao;
-- validar antes de publicar;
-- criar PR em portugues do Brasil;
-- tentar ativar auto-merge.
-
 `humanizer-br` faz revisao editorial em portugues do Brasil para remover marcas de texto gerado por IA, melhorar ritmo, clareza, naturalidade e voz autoral.
 
 `aprofundador` deve ser usado depois do `humanizer-br` quando o texto precisa de mais analise, contexto, implicacao estrategica, comparacao ou sintese.
 
 `ralph-marketer` adapta o fluxo Ralph Wiggum Marketer para Codex, com pipeline de conteudo SaaS, PRD, SQLite, rascunhos, revisao e publicacao.
 
-`token-capital-capture` transforma sessoes Codex relevantes em eventos, memorias, patterns, evals ou decisoes versionadas no repositorio de Token Capital configurado pelo projeto. Use no inicio e no fechamento de tarefas nao triviais, PRs, bugs, decisoes, deploys, operacao, IA/agentes ou qualquer sessao com aprendizado reutilizavel.
+`token-capital-capture` transforma sessoes Codex relevantes em eventos, memorias, patterns, evals ou decisoes versionadas no repositorio de Token Capital configurado pelo projeto. Use no inicio e no fechamento de tarefas nao triviais, bugs, decisoes, deploys, operacao, IA/agentes ou qualquer sessao com aprendizado reutilizavel.
 
 ## Uso em projetos
 
@@ -103,12 +91,9 @@ Copie os templates para o projeto que vai receber as regras:
 
 ```text
 AGENTS.md
-.codex/pr-automerge-policy.md
 ```
 
 No `AGENTS.md`, substitua os placeholders como `{PROJECT_NAME}`, `{WORKTREE_ROOT}`, `{CRITICAL_PRIORITY_1}`, `{TOKEN_CAPITAL_REPO}` e `{TOKEN_CAPITAL_LOCAL_PATH}` pelas regras do projeto.
-
-Em `.codex/pr-automerge-policy.md`, defina branch base, validacoes preferidas, metodo de merge, local de log e restricoes especificas do repositorio.
 
 Se o projeto tiver frontend com dev server compartilhado, copie `plugins/codex-configs/templates/tools/ensure-frontend-dev.sh` para:
 
@@ -119,8 +104,6 @@ tools/ensure-frontend-dev.sh
 Depois, substitua os placeholders ou configure variaveis como `FRONTEND_DEV_PROJECT_NAME`, `FRONTEND_DEV_CANONICAL_ROOT`, `FRONTEND_DEV_FRONTEND_DIR`, `FRONTEND_DEV_PORT`, `FRONTEND_DEV_PUBLIC_HOST`, `VITE_DEV_PROXY_TARGET`, `FRONTEND_DEV_NPM_SCRIPT` e `FRONTEND_DEV_START_COMMAND`.
 
 Se a copia nao preservar permissoes de execucao, rode `chmod +x tools/ensure-frontend-dev.sh`.
-
-Projetos legados ainda podem usar `.agents/pr-automerge-policy.md`, mas `.codex` e o caminho recomendado para novas configuracoes.
 
 ### Preset Grupo JF
 
@@ -135,9 +118,7 @@ Ele contem:
 ```text
 AGENTS.md
 .agents/skills/pre-task-spec-approval/SKILL.md
-.agents/skills/post-adjustment-pr-automerge/SKILL.md
 .codex/config.toml
-.codex/pr-automerge-policy.md
 tools/ensure-frontend-dev.sh
 ```
 
@@ -147,9 +128,7 @@ Para aplicar no checkout do Grupo JF:
 cp plugins/codex-configs/templates/projects/grupojf/AGENTS.md /opt/grupojf/AGENTS.md
 mkdir -p /opt/grupojf/.agents/skills /opt/grupojf/.codex /opt/grupojf/tools
 cp -R plugins/codex-configs/templates/projects/grupojf/.agents/skills/pre-task-spec-approval /opt/grupojf/.agents/skills/
-cp -R plugins/codex-configs/templates/projects/grupojf/.agents/skills/post-adjustment-pr-automerge /opt/grupojf/.agents/skills/
 cp plugins/codex-configs/templates/projects/grupojf/.codex/config.toml /opt/grupojf/.codex/config.toml
-cp plugins/codex-configs/templates/projects/grupojf/.codex/pr-automerge-policy.md /opt/grupojf/.codex/pr-automerge-policy.md
 cp plugins/codex-configs/templates/projects/grupojf/tools/ensure-frontend-dev.sh /opt/grupojf/tools/ensure-frontend-dev.sh
 chmod +x /opt/grupojf/tools/ensure-frontend-dev.sh
 ```

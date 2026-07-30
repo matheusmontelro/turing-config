@@ -1,14 +1,14 @@
 {
   "name": "codex-configs",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Reusable Codex workflows, Token Capital capture, editorial skills, marketing workflows, dev-server helpers, and project configuration templates.",
   "author": {
     "name": "Matheus",
     "email": "ferreiramatheus10@gmail.com",
     "url": "https://github.com/matheusmontelro"
   },
-  "homepage": "https://github.com/matheusmontelro/codex-configs",
-  "repository": "https://github.com/matheusmontelro/codex-configs",
+  "homepage": "https://github.com/matheusmontelro/turing-config",
+  "repository": "https://github.com/matheusmontelro/turing-config",
   "license": "MIT",
   "keywords": [
     "codex",
@@ -18,18 +18,17 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Codex Configs",
-    "shortDescription": "Reusable Codex skills, Token Capital capture, specs, editorial workflows, and PR defaults.",
-    "longDescription": "Reusable Codex workflows for development and writing sessions, including Token Capital capture, pre-task approval specs, PR publication patterns, Portuguese editorial rewriting, content deepening, SaaS marketing workflows, frontend dev-server guardrails, validation guardrails, and project configuration templates.",
+    "shortDescription": "Reusable Codex skills, Token Capital capture, specs, and editorial workflows.",
+    "longDescription": "Reusable Codex workflows for development and writing sessions, including Token Capital capture, pre-task approval specs, Portuguese editorial rewriting, content deepening, SaaS marketing workflows, frontend dev-server guardrails, validation guardrails, and project configuration templates.",
     "developerName": "Matheus",
     "category": "Productivity",
     "capabilities": [
       "Read",
       "Write"
     ],
-    "websiteURL": "https://github.com/matheusmontelro/codex-configs",
+    "websiteURL": "https://github.com/matheusmontelro/turing-config",
     "defaultPrompt": [
       "Use pre-task-spec-approval before non-trivial code or configuration changes.",
-      "Use post-adjustment-pr-automerge after a code task to publish a validated PR from an isolated worktree.",
       "Use token-capital-capture at the start and close of relevant Codex sessions to consult and persist reusable learning.",
       "Use humanizer-br for Portuguese-BR writing, rewriting, copy, or editorial polish.",
       "Use aprofundador after humanizer-br when a text needs more analysis, argument, interpretation, or intellectual density."

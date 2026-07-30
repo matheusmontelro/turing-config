@@ -22,7 +22,7 @@ Permitido antes da aprovacao:
 Proibido antes da aprovacao:
 
 1. Editar, criar, mover, remover ou formatar arquivos.
-2. Criar migrations, branches, commits, PRs ou alterar servicos.
+2. Criar migrations, branches, commits ou alterar servicos.
 3. Instalar dependencias, rodar builds de producao, reiniciar processos ou executar comandos destrutivos.
 4. Criar abstracoes compartilhadas, renomear modulos ou alterar contratos publicos sem estar na spec aprovada.
 
@@ -50,7 +50,7 @@ Pode pular a spec quando a tarefa for apenas analise, resposta textual, leitura 
 5. Aguardar aprovacao explicita antes de editar. Aceite respostas como "aprovado", "pode fazer", "manda", "segue" ou equivalente claro.
 6. Se o usuario pedir ajustes, revise a spec e aguarde nova aprovacao.
 7. Depois da aprovacao, criar ou usar um worktree/branch isolado quando a tarefa for nao trivial, paralela ou tocar mais de um modulo.
-8. Encaminhar a implementacao para o fluxo normal do repositorio e finalizar com a skill de PR/automerge quando houver mudanca de arquivo.
+8. Encaminhar a implementacao para o fluxo normal do repositorio e concluir com as validacoes e o criterio de pronto aprovados.
 
 ## Template Obrigatorio
 
@@ -83,7 +83,7 @@ Use este formato, adaptando o nivel de detalhe ao risco da tarefa:
 - Base prevista: `{branch-base}`
 - Branch sugerida: `work/codex-{data-hora}-{descricao-kebab}`
 - Worktree sugerido: `{WORKTREE_ROOT}/codex-{data-hora}-{descricao-kebab}`
-- Regra: 1 demanda aprovada = 1 spec = 1 worktree = 1 branch = 1 PR.
+- Regra: 1 demanda aprovada = 1 spec = 1 worktree = 1 branch.
 
 ### Validacao Esperada
 - `{comando ou verificacao focada}`

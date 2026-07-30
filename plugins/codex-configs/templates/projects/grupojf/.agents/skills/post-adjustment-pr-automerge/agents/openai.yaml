@@ -1,4 +1,0 @@
-interface:
-  display_name: "Guardião de PR com Auto-Merge"
-  short_description: "PR isolado com validação e auto-merge."
-  default_prompt: "Depois de qualquer ajuste de código concluído em um repositório GitHub confiável, conduza a criação do PR a partir do worktree validado da tarefa. Se a implementação veio do checkout compartilhado, crie worktree limpo e copie só os arquivos da sessão; se já veio de worktree isolado aprovado, publique essa branch sem criar outro worktree por padrão. Nunca abra PR que dependa de arquivos soltos no checkout local. Escreva mensagens ao usuário, título/corpo do PR, comentários, status e bloqueios sempre em português do Brasil."
