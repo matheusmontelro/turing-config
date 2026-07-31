@@ -25,8 +25,6 @@ Repositorio para versionar configuracoes reutilizaveis do Codex: skills, plugins
         │   └── ralph-marketer/
         └── templates/
             ├── AGENTS.md
-            ├── projects/
-            │   └── grupojf/
             └── tools/
                 └── ensure-frontend-dev.sh
 ```
@@ -101,39 +99,11 @@ Depois, substitua os placeholders ou configure variaveis como `FRONTEND_DEV_PROJ
 
 Se a copia nao preservar permissoes de execucao, rode `chmod +x tools/ensure-frontend-dev.sh`.
 
-### Preset Grupo JF
-
-O preset do Grupo JF fica em:
-
-```text
-plugins/codex-configs/templates/projects/grupojf/
-```
-
-Ele contem:
-
-```text
-AGENTS.md
-.agents/skills/pre-task-spec-approval/SKILL.md
-.codex/config.toml
-tools/ensure-frontend-dev.sh
-```
-
-Para aplicar no checkout do Grupo JF:
-
-```bash
-cp plugins/codex-configs/templates/projects/grupojf/AGENTS.md /opt/grupojf/AGENTS.md
-mkdir -p /opt/grupojf/.agents/skills /opt/grupojf/.codex /opt/grupojf/tools
-cp -R plugins/codex-configs/templates/projects/grupojf/.agents/skills/pre-task-spec-approval /opt/grupojf/.agents/skills/
-cp plugins/codex-configs/templates/projects/grupojf/.codex/config.toml /opt/grupojf/.codex/config.toml
-cp plugins/codex-configs/templates/projects/grupojf/tools/ensure-frontend-dev.sh /opt/grupojf/tools/ensure-frontend-dev.sh
-chmod +x /opt/grupojf/tools/ensure-frontend-dev.sh
-```
-
-No Grupo JF, mantenha `.codex/dev-logs/`, `.codex/sessions.md` e arquivos de ambiente fora do Git.
-
 ## O que nao esta incluso
 
 Este repositorio guarda configuracoes reutilizaveis. Skills locais e especificas de um produto, como uma skill de frontend de um projeto particular, nao devem ser copiadas para ca.
+
+Presets, nomes, caminhos e regras de empresas ou projetos particulares tambem devem ficar fora deste repositorio publico.
 
 ## Referencias oficiais
 

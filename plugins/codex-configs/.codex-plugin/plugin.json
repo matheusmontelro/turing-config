@@ -1,6 +1,6 @@
 {
   "name": "codex-configs",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Reusable Codex workflows, editorial skills, marketing workflows, dev-server helpers, and project configuration templates.",
   "author": {
     "name": "Matheus",
