@@ -47,7 +47,7 @@ Regras praticas:
 
 ## Skills
 
-`pre-task-spec-approval` exige uma spec curta em pt-BR antes de toda tarefa, inclusive analise, leitura, busca, comando simples ou edicao pequena. Nenhuma ferramenta ou execucao e permitida antes da aprovacao explicita da spec.
+`pre-task-spec-approval` exige, antes de toda tarefa, uma analise minuciosa e somente leitura da solicitacao e do contexto relevante. A partir das evidencias, o Codex produz uma spec detalhada em pt-BR com requisitos, plano por etapas, matriz de rastreabilidade e fluxos completos de testes; nenhuma entrega ou acao que altere estado e permitida antes da aprovacao explicita.
 
 `humanizer-br` faz revisao editorial em portugues do Brasil para remover marcas de texto gerado por IA, melhorar ritmo, clareza, naturalidade e voz autoral.
 
@@ -76,6 +76,12 @@ Para expor o bundle como plugin local, mantenha:
 plugins/codex-configs/.codex-plugin/plugin.json
 plugins/codex-configs/skills/
 ```
+
+Instalar o plugin disponibiliza as skills, mas nao obriga o host a ativa-las em
+toda solicitacao. O campo `defaultPrompt` oferece prompts iniciais e nao funciona
+como uma politica persistente. Para tornar o gate de analise e spec uma regra
+duravel de um projeto, copie e preencha tambem
+`plugins/codex-configs/templates/AGENTS.md` na raiz desse projeto.
 
 Depois de alterar marketplace, plugin ou skills, reinicie o Codex para garantir nova descoberta.
 

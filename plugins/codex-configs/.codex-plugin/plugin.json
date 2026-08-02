@@ -1,6 +1,6 @@
 {
   "name": "codex-configs",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Reusable Codex workflows, editorial skills, marketing workflows, dev-server helpers, and project configuration templates.",
   "author": {
     "name": "Matheus",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Codex Configs",
-    "shortDescription": "Reusable Codex skills with mandatory pre-task approval specs.",
-    "longDescription": "Reusable Codex workflows for development and writing sessions, including a universal pre-task approval gate, Portuguese editorial rewriting, content deepening, SaaS marketing workflows, frontend dev-server guardrails, validation guardrails, and project configuration templates.",
+    "shortDescription": "Analyzed approval specs",
+    "longDescription": "Reusable Codex workflows for development and writing sessions, including read-only pre-task analysis, detailed and traceable approval specs, complete validation flows, Portuguese editorial rewriting, content deepening, SaaS marketing workflows, frontend dev-server guardrails, and project configuration templates.",
     "developerName": "Matheus",
     "category": "Productivity",
     "capabilities": [
@@ -28,7 +28,7 @@
     ],
     "websiteURL": "https://github.com/matheusmontelro/turing-config",
     "defaultPrompt": [
-      "Before every task, use pre-task-spec-approval and wait for explicit approval before calling tools or executing any part of the request.",
+      "Analyze read-only, then use pre-task-spec-approval for a traceable spec with complete tests; wait before changes.",
       "Use humanizer-br for Portuguese-BR writing, rewriting, copy, or editorial polish.",
       "Use aprofundador after humanizer-br when a text needs more analysis, argument, interpretation, or intellectual density."
     ]

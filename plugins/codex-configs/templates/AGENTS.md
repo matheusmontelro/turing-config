@@ -18,7 +18,7 @@ They apply to the whole project unless a more specific `AGENTS.override.md` or n
 
 ## Critical Working Rules
 
-- The mandatory spec gate below applies before every task and takes precedence over all execution workflows.
+- The mandatory analysis and spec gate below applies before every task and takes precedence over all execution workflows.
 - Never run production build, deploy, migration, destructive data, or broad restart commands without explicit user approval in the current conversation.
 - Use development-mode validation by default. Production builds are the exception and always require explicit approval in the current conversation.
 - At the end of any completed adjustment, identify which runtime services load the changed files, restart or reload only those corresponding services when a reload is required, then validate status, health, or logs.
@@ -30,18 +30,23 @@ They apply to the whole project unless a more specific `AGENTS.override.md` or n
 
 ## Mandatory Spec Approval
 
-- Before every task, use the `pre-task-spec-approval` skill and present a pt-BR spec for explicit user approval.
+- Before every task, use the `pre-task-spec-approval` skill, perform a scoped read-only analysis, and present a detailed pt-BR spec for explicit user approval.
 - If the project keeps repo-scoped skills, the documented location is `.agents/skills/pre-task-spec-approval/SKILL.md`.
 - This gate is universal. It includes analysis, explanations, textual answers, file reads, status checks, searches, diagnostics, simple commands, small edits, configuration, implementation, tests, builds, external actions, and delegated work.
-- The first substantive response to a new task must be the spec. Before approval, do not call tools, inspect files or systems, browse, run commands, delegate work, answer the requested analysis, or change any local or external state.
-- Before approval, Codex may only use context already present, ask an essential blocking question, present or revise the spec, and receive approval, rejection, cancellation, or requested changes.
+- Before writing the spec, inspect only the relevant request context, files, code, tests, contracts, documentation, history, and status needed to understand the current behavior. Use only operations whose documented semantics are read-only and that create no workspace, cache, record, or external-system changes.
+- During discovery, separate confirmed facts, justified inferences, assumptions, and unknowns. Summarize only evidence-backed findings; do not expose private chain-of-thought.
+- Before approval, do not edit files, create workspace artifacts, install dependencies, run tests, linters, typechecks, formatters or builds, delegate to subagents, create branches or PRs, execute the requested delivery, or perform any local or external state-changing action.
 - The original request is not advance approval. Approval is valid only when the user responds after the latest spec with an unambiguous confirmation such as `approved`, `pode executar`, or `segue com essa spec`.
 - The spec must include:
-  - objective and expected behavior;
-  - planned inspections, tools, commands, or changes;
-  - allowed scope and explicitly out-of-scope areas, using `to be confirmed after approval` where inspection is required;
-  - validation plan;
-  - risks and done criteria.
+  - analyzed evidence, current behavior, facts, inferences, assumptions, and remaining unknowns;
+  - numbered requirements, including every behavior that must be preserved;
+  - a detailed, ordered execution plan with affected files or modules and intermediate results;
+  - allowed scope, explicitly out-of-scope areas, contracts, and compatibility concerns;
+  - a traceability matrix connecting every requirement to an execution step and a test;
+  - complete test flows with preconditions, data, steps, expected results, and evidence;
+  - applicable success, error, boundary, permission, security, regression, integration, runtime, rollback, and cleanup scenarios, with justified `N/A` entries;
+  - risks, stop conditions, reversal, and objective done criteria.
+- Do not present the spec while a requirement lacks an implementation step or validation flow.
 - After approval, inspect and execute only the approved scope. If discovery requires a material scope change, stop and submit a revised spec for a new approval.
 - Approval, rejection, cancellation, revision of the current spec, execution within an approved spec, and its final report do not require another spec.
 - Default rule for parallelizable work: `1 approved demand = 1 spec = 1 worktree = 1 branch`.
