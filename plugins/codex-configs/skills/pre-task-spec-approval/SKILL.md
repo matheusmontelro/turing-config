@@ -1,133 +1,229 @@
 ---
 name: pre-task-spec-approval
-description: Criar uma spec curta e aprovavel antes de qualquer tarefa solicitada ao Codex. Usar sempre, inclusive para analise, resposta textual, leitura de arquivo, busca, diagnostico, comando simples, edicao pequena, configuracao ou implementacao, bloqueando ferramentas e execucao ate a aprovacao explicita da spec.
+description: Analisar minuciosamente toda nova solicitacao em modo somente leitura e criar uma spec detalhada, rastreavel e aprovavel antes de executar a tarefa ou alterar estado. Usar sempre, inclusive para analise, resposta textual, leitura, busca, diagnostico, comando simples, edicao, configuracao ou implementacao; exigir plano por etapas, fluxos completos de validacao e aprovacao explicita antes da execucao.
 ---
 
-# Spec Antes de Qualquer Tarefa
+# Analise e Spec Antes de Qualquer Tarefa
 
 ## Objetivo
 
-Transformar toda tarefa em uma spec revisavel pelo usuario antes de qualquer
-analise, inspecao ou execucao. A spec deve tornar objetivo, escopo, acoes,
-ferramentas, validacao, riscos e criterio de pronto claros antes do trabalho.
+Transformar toda solicitacao em uma spec fiel ao pedido e ao contexto real. Antes
+de escrever a spec, analisar evidencias relevantes em modo somente leitura. Na
+spec, ligar cada requisito a uma etapa de execucao e a um fluxo de validacao.
 
 ## Regra Central
 
-A primeira resposta substantiva a toda nova tarefa deve ser uma spec. Antes da
-aprovacao explicita da spec, nao execute a tarefa nem chame ferramentas, mesmo
-que a operacao seja simples, reversivel ou somente leitura.
+Iniciar toda nova tarefa com descoberta minuciosa e limitada ao escopo, seguida
+da spec. Antes da aprovacao explicita, nao executar a entrega nem realizar
+qualquer acao que altere estado local ou externo.
+
+A analise anterior a spec nao e implementacao. Ela serve somente para reduzir
+ambiguidade, confirmar o estado atual e produzir um plano executavel.
 
 Permitido antes da aprovacao:
 
-1. Interpretar apenas a mensagem do usuario e o contexto ja presente.
-2. Fazer uma pergunta curta somente quando for impossivel montar uma spec segura
-   sem a resposta.
-3. Apresentar ou revisar a spec.
-4. Receber aprovacao, rejeicao, cancelamento ou pedido de ajuste da spec.
+1. Interpretar a solicitacao e o contexto ja presente.
+2. Inspecionar, em modo somente leitura, os arquivos, codigo, testes, contratos,
+   configuracoes, documentacao, historico e status estritamente relevantes.
+3. Consultar fontes externas ou conectores em modo somente leitura somente
+   quando forem necessarios e estiverem dentro do escopo solicitado.
+4. Usar somente ferramentas cuja operacao documentada seja de leitura e que nao
+   criem arquivos, caches, registros ou alteracoes no sistema consultado.
+5. Fazer uma pergunta curta quando uma decisao material continuar impossivel de
+   inferir depois da descoberta segura.
+6. Apresentar ou revisar a spec e receber sua aprovacao, rejeicao ou cancelamento.
 
 Proibido antes da aprovacao:
 
-1. Chamar qualquer ferramenta, subagente, conector, navegador, terminal ou API.
-2. Inspecionar arquivos, repositorios, logs, historico, status, mensagens,
-   calendarios, documentos ou sistemas externos.
-3. Rodar comandos, buscas, diagnosticos, testes, builds ou validacoes, inclusive
-   os que nao alteram estado.
-4. Responder a analise solicitada, produzir a entrega ou iniciar qualquer parte
-   operacional da tarefa.
-5. Editar, criar, mover, remover, formatar, instalar, enviar, publicar,
-   versionar, reiniciar ou alterar estado local ou externo.
+1. Editar, criar, mover, remover ou formatar arquivos.
+2. Criar branch, worktree, commit, PR, migration ou artefato no workspace.
+3. Instalar dependencias; executar testes, linters, typechecks, formatadores ou
+   builds; disparar automacoes; ou delegar trabalho a subagentes.
+4. Executar deploys, reinicios, escritas em banco, chamadas externas mutaveis ou
+   qualquer comando que possa gerar cache, fixture, cobertura ou outro estado.
+5. Executar a entrega pedida, enviar mensagens, publicar conteudo ou alterar
+   qualquer sistema.
+6. Ampliar a investigacao para dados, sistemas ou pessoas sem relacao necessaria
+   com a solicitacao.
+
+## Analise Obrigatoria Antes da Spec
+
+Completar esta sequencia antes de redigir a spec:
+
+1. Decompor o pedido em resultado desejado, atores, entradas, saidas, regras,
+   restricoes e comportamentos a preservar.
+2. Inspecionar o estado atual e localizar implementacoes, contratos, testes,
+   documentacao e convencoes que governam a demanda.
+3. Registrar evidencias concretas, como arquivos, modulos, rotas, schemas,
+   comandos existentes, documentacao ou estado consultado.
+4. Separar fatos confirmados, inferencias justificadas, hipoteses e pontos ainda
+   desconhecidos. Nunca apresentar suposicao como fato.
+5. Mapear camadas e fluxos afetados, dependencias, compatibilidade, permissoes,
+   dados, seguranca, concorrencia, runtime e reversao quando aplicaveis.
+6. Numerar todos os requisitos, inclusive comportamentos a preservar, como
+   `R1`, `R2` e assim por diante.
+7. Derivar etapas de execucao `E1`, `E2` e testes `T1`, `T2` diretamente dos
+   requisitos analisados.
+8. Confirmar que cada requisito possui ao menos uma etapa e uma validacao
+   correspondente antes de apresentar a spec.
+
+Expor ao usuario somente o resumo verificavel dessa analise: evidencias, fatos,
+inferencias, lacunas e decisoes. Nao expor raciocinio privado ou cadeia de
+pensamento.
 
 ## Cobertura Universal
 
-Exija spec para toda tarefa, sem excecao por tamanho ou aparente simplicidade.
-Isso inclui:
+Exigir spec para toda tarefa, sem excecao por tamanho ou aparente simplicidade:
 
 1. Analise, explicacao, revisao, pesquisa ou resposta textual.
 2. Leitura de arquivo, consulta de status, busca local ou navegacao web.
-3. Comando simples, diagnostico ou verificacao somente leitura.
+3. Comando simples, diagnostico ou verificacao.
 4. Edicao pequena, correcao, configuracao, refactor ou feature.
-5. Instalacao, teste, build, automacao ou operacao em sistema externo.
+5. Instalacao, teste, build, automacao ou operacao externa.
 6. Trabalho delegado a outro agente.
 
-Nao crie uma nova spec para:
+Nao criar nova spec para aprovar, rejeitar, cancelar ou revisar a spec atual;
+executar etapas ja aprovadas; ou entregar o resumo final da mesma tarefa.
 
-1. Aprovar, rejeitar, cancelar ou pedir ajuste da spec atual.
-2. Executar etapas e responder dentro do escopo de uma spec ja aprovada.
-3. Entregar o resumo final da tarefa aprovada.
-
-A solicitacao original nao vale como aprovacao antecipada. Considere aprovada
-somente uma resposta enviada depois da spec mais recente, como "aprovado",
-"pode executar", "segue com essa spec" ou equivalente inequivoco.
+A solicitacao original nao vale como aprovacao antecipada. Considerar aprovada
+somente uma resposta posterior a spec mais recente, como "aprovado", "pode
+executar" ou equivalente inequivoco.
 
 ## Workflow
 
-1. Identificar a nova tarefa e entrar em modo spec sem chamar ferramentas.
-2. Escrever a spec em portugues do Brasil usando apenas o pedido e o contexto ja
-   disponivel. Marcar como "a confirmar depois da aprovacao" o que depender de
-   inspecao.
-3. Encerrar a resposta pedindo aprovacao explicita e aguardar.
-4. Se o usuario pedir ajustes, revisar a spec e aguardar nova aprovacao.
-5. Depois da aprovacao, inspecionar o contexto necessario e executar somente o
-   escopo aprovado.
-6. Se a descoberta exigir ampliar ou mudar materialmente o escopo, parar,
-   apresentar uma spec revisada e aguardar nova aprovacao.
-7. Concluir com as validacoes e o criterio de pronto aprovados.
+1. Identificar a nova tarefa e entrar em modo de analise somente leitura.
+2. Executar a analise obrigatoria e conferir o gate de qualidade.
+3. Perguntar somente se restar uma decisao bloqueante que mudaria materialmente
+   o plano.
+4. Escrever a spec em portugues do Brasil com evidencias, etapas e testes
+   concretos.
+5. Encerrar pedindo aprovacao explicita e aguardar.
+6. Revisar a spec e renovar o pedido de aprovacao quando o usuario ajustar o
+   escopo.
+7. Depois da aprovacao, criar isolamento quando necessario e executar somente o
+   plano autorizado.
+8. Parar e apresentar spec revisada se uma descoberta posterior exigir mudanca
+   material de escopo, contrato, risco ou validacao.
+9. Concluir executando as validacoes aprovadas e relatando evidencias reais.
 
 ## Template Obrigatorio
 
-Use este formato em toda tarefa. Para pedidos simples, mantenha cada secao em
-uma linha; nunca elimine o gate:
+Usar todas as secoes abaixo. Em tarefas simples, ser conciso sem remover analise,
+rastreabilidade ou validacao.
 
 ```markdown
 ## Spec Proposta
 
-### Objetivo
-{O resultado que o usuario quer, em uma ou duas frases.}
+### Analise Realizada
+- Fontes e evidencias consultadas: {arquivos, contratos, testes, docs ou sistemas}.
+- Estado atual confirmado: {comportamento existente relevante}.
+- Fatos confirmados: {fatos verificaveis}.
+- Inferencias e hipoteses: {itens ainda nao confirmados e seu impacto}.
 
-### Acoes Previstas
-- {Inspecoes, comandos, ferramentas ou alteracoes que serao executados depois da aprovacao.}
+### Objetivo
+{Resultado exato que o usuario espera.}
+
+### Requisitos e Comportamento Esperado
+- R1. {Requisito observavel}.
+- R2. {Comportamento, erro, limite ou estado relevante}.
+- R3. Preservar {contratos e comportamentos que nao podem regredir}.
+
+### Plano de Execucao
+1. E1. {Etapa, local afetado, acao e resultado intermediario esperado}.
+2. E2. {Etapa seguinte e sua dependencia}.
 
 ### Escopo Permitido
-- {Arquivos, sistemas, dados ou assuntos cobertos; use "a confirmar depois da aprovacao" quando necessario.}
+- {Arquivos, modulos, sistemas ou dados cobertos}.
 
 ### Fora de Escopo
-- {O que nao sera consultado, alterado ou executado.}
+- {O que nao sera consultado, alterado ou executado}.
 
-### Validacao Esperada
-- {Como o resultado sera conferido.}
+### Contratos e Compatibilidade
+- {APIs, schemas, eventos, permissoes, dados ou integracoes afetados}.
 
-### Riscos e Pontos de Atencao
-- {Risco real ou "baixo risco", com justificativa curta.}
+### Matriz de Rastreabilidade
+| Requisito | Etapa de execucao | Teste ou evidencia |
+|---|---|---|
+| R1 | E1 | T1 |
+| R2 | E2 | T2, T3 |
+| R3 | E1, E2 | T3 |
+
+### Fluxos Completos de Teste
+| ID | Cenario | Pre-condicoes e dados | Passos | Resultado esperado | Evidencia |
+|---|---|---|---|---|---|
+| T1 | Fluxo principal | {...} | {...} | {...} | {comando, resposta, tela ou log} |
+| T2 | Erro ou limite | {...} | {...} | {...} | {...} |
+
+- Cobrir ou justificar como `N/A`: fluxo principal; erros e limites; estados
+  vazios; permissoes, autenticacao e isolamento de dados; seguranca; regressao;
+  integracao; persistencia e migracao; concorrencia; responsividade e
+  acessibilidade; runtime, observabilidade e health check; reversao e limpeza.
+- Para entregas nao tecnicas, adaptar os fluxos para verificacao de fontes,
+  completude, fidelidade, formato e criterios objetivos de qualidade.
+
+### Riscos, Condicoes de Parada e Reversao
+- Risco: {risco e mitigacao}.
+- Parar se: {condicao que exige nova decisao ou spec revisada}.
+- Reverter por: {procedimento seguro ou N/A justificado}.
+
+### Worktree e Branch
+- Base: `{branch-base}`.
+- Branch/worktree: `{isolamento previsto ou N/A justificado}`.
 
 ### Criterio de Pronto
-- {Como saber que a tarefa terminou.}
+- {Resultado verificavel, testes aprovados e evidencia final esperada}.
 
 ### Aprovacao
 Responda "aprovado" para autorizar exatamente esta spec.
 ```
 
+## Regras Para os Fluxos de Teste
+
+1. Especificar pre-condicoes, dados, passos, resultado esperado e evidencia; nao
+   listar apenas o nome de um comando.
+2. Cobrir o caminho principal e os modos de falha plausiveis descobertos.
+3. Incluir testes focados, integrados e de regressao na proporcao do impacto.
+4. Nomear comandos e checks reais encontrados no projeto. Nao inventar scripts.
+5. Distinguir validacao planejada de validacao ja executada.
+6. Marcar uma categoria como `N/A` somente com justificativa concreta.
+7. Incluir validacao de runtime quando a mudanca somente se torna ativa apos
+   reload, restart, deploy, migration ou processamento assincrono.
+8. Definir limpeza de fixtures, artefatos e dados temporarios.
+
+## Gate de Qualidade da Spec
+
+Nao apresentar a spec enquanto qualquer item abaixo falhar:
+
+1. O objetivo corresponde ao pedido, sem ampliar silenciosamente o escopo.
+2. Evidencias sustentam o estado atual descrito.
+3. Fatos, inferencias e lacunas estao separados.
+4. O plano possui ordem, dependencias e resultados intermediarios claros.
+5. Todo requisito aparece na matriz de rastreabilidade.
+6. Os testes validam sucesso, falhas e preservacao dos contratos relevantes.
+7. Riscos, condicoes de parada, reversao e criterio de pronto sao objetivos.
+8. O usuario consegue entender exatamente o que sua aprovacao autoriza.
+
 ## Regras Para Worktrees Paralelos
 
-A exigencia de spec e universal; o isolamento e condicional. Depois da
-aprovacao, use worktree isolado para tarefas nao triviais, paralelas ou que
-toquem mais de um modulo:
+Depois da aprovacao, usar worktree isolado para tarefas nao triviais, paralelas
+ou que toquem mais de um modulo:
 
 ```text
 {WORKTREE_ROOT}/codex-{YYYYMMDD-HHMM}-{descricao-kebab}
 ```
 
-Use branch:
+Usar branch:
 
 ```text
 work/codex-{YYYYMMDD-HHMM}-{descricao-kebab}
 ```
 
-Se o agente ja estiver dentro de um worktree isolado da tarefa, continue nele. Se estiver no checkout principal compartilhado, crie o worktree a partir da branch base aprovada antes de editar.
-
-Nunca coloque dois agentes implementando demandas diferentes no mesmo worktree. Se a tarefa precisar tocar arquivo fora do escopo aprovado, pare, explique o motivo e peça aprovacao de uma spec revisada.
+Nunca colocar demandas diferentes no mesmo worktree. Se a implementacao exigir
+arquivo ou sistema fora do escopo aprovado, parar e pedir aprovacao de uma spec
+revisada.
 
 ## Tom da Spec
 
-Escreva para decisao, nao para impressionar tecnicamente. A spec deve ser
-proporcional ao risco, mas sempre clara o bastante para o usuario saber
-exatamente o que sera autorizado.
+Escrever para decisao. Ser detalhado onde houver impacto, risco ou dependencia e
+direto onde a tarefa for simples. Nao usar generalidades como "testar tudo" ou
+"ajustar o necessario"; nomear comportamento, etapa e evidencia.
